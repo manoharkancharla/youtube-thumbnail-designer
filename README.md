@@ -53,9 +53,3 @@ Each run creates `outputs/<timestamp>_<topic>/`:
 - `final.png` — the highest-rated thumbnail
 - `report.md` — full history: prompt used, score, and critique per iteration
 
-## Notes / Deviations from the architecture diagram
-
-- **No changes** to the 5-node + 1-conditional-edge architecture.
-- `history` uses `Annotated[list[IterationRecord], operator.add]` so each `critic` call appends rather than overwrites.
-- The critic is deliberately strict (most images score 5–7) so the loop fires at least once before reaching the default target of 8.
-- `generator` uses `httpx` to download the DALL-E image URL since the API returns a URL, not raw bytes.
